@@ -22,15 +22,11 @@ export const checkUserAuth = createAsyncThunk(
 );
 
 export const logout = createAsyncThunk('user/logout', (_, { dispatch }) => {
-  logoutApi()
-    .then(() => {
-      deleteCookie('accessToken');
-      localStorage.removeItem('refreshToken');
-      dispatch(userSlice.actions.logout());
-    })
-    .catch(() => {
-      console.log('Ошибка выполнения выхода');
-    });
+  logoutApi().then(() => {
+    deleteCookie('accessToken');
+    localStorage.removeItem('refreshToken');
+    dispatch(userSlice.actions.logout());
+  });
 });
 
 type TUserState = {

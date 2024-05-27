@@ -25,6 +25,12 @@ const App = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+  const checkUrlIngridients =
+    location.pathname.split('/').length > 2 &&
+    location.pathname.includes('ingredients')
+      ? true
+      : false;
+
   const backgroundLocation = location.state?.background;
 
   useEffect(() => {
@@ -39,6 +45,7 @@ const App = () => {
   return (
     <div className={styles.app}>
       <AppHeader />
+      {checkUrlIngridients && <ConstructorPage />}
       <Routes location={backgroundLocation || location}>
         <Route path='/' element={<ConstructorPage />} />
         <Route path='/feed' element={<Feed />} />
@@ -99,7 +106,16 @@ const App = () => {
           }
         />
         <Route path='/feed/:number' element={<OrderInfo />} />
-        <Route path='/ingredients/:id' element={<IngredientDetails />} />
+        {checkUrlIngridients && (
+          <Route
+            path='/ingredients/:id'
+            element={
+              <Modal title={'Детали ингридиента'} onClose={handleModalClose}>
+                <IngredientDetails />
+              </Modal>
+            }
+          />
+        )}
         <Route path='*' element={<NotFound404 />} />
       </Routes>
       {backgroundLocation && (
