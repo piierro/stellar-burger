@@ -2,7 +2,7 @@ import { deleteCookie, getCookie, setCookie } from '../../utils/cookie';
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { TUser } from '@utils-types';
 import { getUser, login, register, updateUser } from './authApi';
-import { logoutApi } from '@api';
+import { logoutApi } from '../../utils/burger-api';
 
 export const checkUserAuth = createAsyncThunk(
   'user/checkUser',
@@ -93,7 +93,6 @@ export const userSlice = createSlice({
         state.error = action.error.message!;
       })
       .addCase(logout.pending, (state) => {
-        // state.isAuthChecked = false;
         state.error = undefined;
       })
       .addCase(logout.fulfilled, (state) => {
@@ -104,7 +103,6 @@ export const userSlice = createSlice({
         state.error = action.error.message;
       })
       .addCase(updateUser.pending, (state) => {
-        // state.isAuthChecked = false;
         state.error = undefined;
       })
       .addCase(updateUser.fulfilled, (state, action) => {

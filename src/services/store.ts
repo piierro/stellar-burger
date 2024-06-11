@@ -14,7 +14,7 @@ import useReducer from './auth/slice';
 import ordersReducer from './slices/ordersSlice';
 import newOrderRequestReducer from './slices/orderRequest';
 
-const rootReducer = combineReducers({
+export const rootReducer = combineReducers({
   ingredients: ingredientsReducer,
   burgerConstructor: burgerConstructorReducer,
   feed: feedReducer,
@@ -23,7 +23,7 @@ const rootReducer = combineReducers({
   orderRequest: newOrderRequestReducer
 });
 
-const store = configureStore({
+export const store = configureStore({
   reducer: rootReducer,
   devTools: process.env.NODE_ENV !== 'production'
 });

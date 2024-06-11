@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
-import { orderBurgerApi } from '@api';
+import { orderBurgerApi } from '../../utils/burger-api';
 import { TOrder } from '@utils-types';
 
 export const placeOrderRequest = createAsyncThunk(
@@ -13,13 +13,11 @@ export const placeOrderRequest = createAsyncThunk(
 type TOrderRequestState = {
   orderRequest: boolean;
   order: TOrder | null;
-  // name: string;
 };
 
 export const initialState: TOrderRequestState = {
   orderRequest: false,
   order: null
-  // name: ''
 };
 
 const newOrderRequestSlice = createSlice({
@@ -41,7 +39,6 @@ const newOrderRequestSlice = createSlice({
       .addCase(placeOrderRequest.fulfilled, (state, action) => {
         state.orderRequest = false;
         state.order = action.payload.order;
-        // state.name = action.payload.name;
       });
   }
 });

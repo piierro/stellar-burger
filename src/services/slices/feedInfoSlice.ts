@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { TOrder } from '@utils-types';
-import { getFeedsApi, getOrdersApi } from '@api';
+import { getFeedsApi } from '../../utils/burger-api';
 
 export const fetchOrders = createAsyncThunk('feed/all', async () => {
   const response = await getFeedsApi();
@@ -13,7 +13,7 @@ type TFeedState = {
   totalToday: number;
 };
 
-const initialState: TFeedState = {
+export const initialState: TFeedState = {
   orders: [],
   total: 0,
   totalToday: 0
@@ -24,15 +24,11 @@ const feedSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: (builder) => {
-    builder
-      .addCase(fetchOrders.fulfilled, (state, action) => {
-        state.orders = action.payload.orders;
-        state.total = action.payload.total;
-        state.totalToday = action.payload.totalToday;
-      })
-      .addCase(fetchOrders.rejected, (state, action) => {
-        console.error('Fetch orders failed:', action.error);
-      });
+    builder.addCase(fetchOrders.fulfilled, (state, action) => {
+      state.orders = action.payload.orders;
+      state.total = action.payload.total;
+      state.totalToday = action.payload.totalToday;
+    });
   }
 });
 
