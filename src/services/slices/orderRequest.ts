@@ -10,7 +10,7 @@ export const placeOrderRequest = createAsyncThunk(
   }
 );
 
-type TOrderRequestState = {
+export type TOrderRequestState = {
   orderRequest: boolean;
   order: TOrder | null;
 };

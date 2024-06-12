@@ -4,20 +4,19 @@ import { getIngredientsApi } from '../../utils/burger-api';
 
 export const fetchIngredients = createAsyncThunk(
   'ingredients/fetchIngredients',
-  async () => {
-    const response = await getIngredientsApi();
-    return response;
-  }
+  getIngredientsApi
 );
 
 type TIngredientState = {
   ingredients: TIngredient[];
   isIngredientsLoading: boolean;
+  ingredientsError: string | null;
 };
 
 export const initialState: TIngredientState = {
   ingredients: [],
-  isIngredientsLoading: false
+  isIngredientsLoading: false,
+  ingredientsError: null
 };
 
 export const ingredientsSlice = createSlice({
@@ -32,10 +31,15 @@ export const ingredientsSlice = createSlice({
     builder
       .addCase(fetchIngredients.pending, (state) => {
         state.isIngredientsLoading = true;
+        state.ingredientsError = null;
       })
       .addCase(fetchIngredients.fulfilled, (state, action) => {
         state.isIngredientsLoading = false;
         state.ingredients = action.payload;
+      })
+      .addCase(fetchIngredients.rejected, (state, action) => {
+        state.isIngredientsLoading = false;
+        state.ingredientsError = action.error.message!;
       });
   }
 });

@@ -3,7 +3,8 @@ import burgerConstructorReducer, {
   initialState,
   addItem,
   removeIngredient,
-  clearConstructor
+  clearConstructor,
+  moveConstructorItem
 } from '../slices/burgerConstructorSlice';
 
 jest.mock('uuid', () => ({
@@ -83,3 +84,68 @@ describe('burgerConstructorSlice', () => {
     expect(newState.ingredients).toHaveLength(0);
   });
 });
+
+// describe('moveConstructorItem', () => {
+//   it('should move the item up when the index is greater than 0', () => {
+//    ([
+//       {
+//         _id: '1',
+//         name: 'Ingredient 1',
+//         type: 'main',
+//         proteins: 1,
+//         fat: 1,
+//         carbohydrates: 1,
+//         calories: 1,
+//         price: 1,
+//         image: '',
+//         image_mobile: '',
+//         image_large: ''
+//       },
+//       {
+//         _id: '2',
+//         name: 'Ingredient 2',
+//         type: 'main',
+//         proteins: 1,
+//         fat: 1,
+//         carbohydrates: 1,
+//         calories: 1,
+//         price: 1,
+//         image: '',
+//         image_mobile: '',
+//         image_large: ''
+//       }
+//     ]);
+//     const action = { payload: 0, newPayload: 1 }; // Индекс 1 соответствует элементу 'Ingredient 2'
+
+//     moveConstructorItem(state, action);
+
+//     expect(state.ingredients).toEqual([
+//       {
+//         _id: '2',
+//         name: 'Ingredient 2',
+//         type: 'main',
+//         proteins: 1,
+//         fat: 1,
+//         carbohydrates: 1,
+//         calories: 1,
+//         price: 1,
+//         image: '',
+//         image_mobile: '',
+//         image_large: ''
+//       },
+//       {
+//         _id: '1',
+//         name: 'Ingredient 1',
+//         type: 'main',
+//         proteins: 1,
+//         fat: 1,
+//         carbohydrates: 1,
+//         calories: 1,
+//         price: 1,
+//         image: '',
+//         image_mobile: '',
+//         image_large: ''
+//       }
+//     ]);
+//   });
+// })
