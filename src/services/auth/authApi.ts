@@ -3,7 +3,6 @@ import {
   registerUserApi,
   loginUserApi,
   updateUserApi,
-  logoutApi,
   getUserApi,
   TRegisterData
 } from '../../utils/burger-api';
@@ -29,6 +28,5 @@ export const login = createAsyncThunk(
     })
 );
 
-// export const logout = createAsyncThunk('auth/logout', logoutApi);
 export const updateUser = createAsyncThunk('user/update', updateUserApi);
 export const getUser = createAsyncThunk('user/getUser', getUserApi);

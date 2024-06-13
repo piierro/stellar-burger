@@ -1,4 +1,4 @@
-import { deleteCookie, getCookie, setCookie } from '../../utils/cookie';
+import { deleteCookie, getCookie } from '../../utils/cookie';
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { TUser } from '@utils-types';
 import { getUser, login, register, updateUser } from './authApi';
@@ -29,7 +29,7 @@ export const logout = createAsyncThunk('user/logout', (_, { dispatch }) => {
   });
 });
 
-type TUserState = {
+export type TUserState = {
   isAuthChecked: boolean;
   user: TUser | null;
   error: string | undefined;
@@ -66,6 +66,7 @@ export const userSlice = createSlice({
       })
       .addCase(getUser.rejected, (state, action) => {
         state.isAuthChecked = false;
+        state.error = action.error.message;
       })
       .addCase(register.pending, (state) => {
         state.isAuthChecked = false;
